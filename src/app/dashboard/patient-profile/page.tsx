@@ -1,15 +1,13 @@
 "use client"
 import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
-import { Profile } from "@/lib/types"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Loader2, Camera, User, CheckCircle2, XCircle, Mail, Phone, MapPin, PawPrint, UserCircle2 } from "lucide-react"
+import { Loader2, Camera, CheckCircle2, XCircle, Mail, Phone, MapPin, PawPrint, UserCircle2 } from "lucide-react"
 
 export default function PatientProfilePage() {
   const [profile, setProfile] = useState<any>(null)
-  const [pets, setPets] = useState<Pet[]>([])
+  const [pets, setPets] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [formData, setFormData] = useState({
@@ -25,7 +23,6 @@ export default function PatientProfilePage() {
     const fetchProfileAndPets = async () => {
       const { data: { session } } = await supabase.auth.getSession()
       if (session) {
-        // Fetch Profile
         let { data: profileData } = await supabase.from('profiles').select('*').eq('id', session.user.id).single()
         if (!profileData) {
           await supabase.from('profiles').insert({ id: session.user.id, role: 'patient' })
@@ -43,7 +40,6 @@ export default function PatientProfilePage() {
           setAvatarPreview(profileData.avatar_url || null)
         }
 
-        // Fetch Pets
         const { data: petsData } = await supabase.from('pets').select('*').eq('owner_id', session.user.id)
         if (petsData) {
           setPets(petsData)
@@ -117,12 +113,9 @@ export default function PatientProfilePage() {
       </div>
 
       <div className="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col border border-border">
-        {/* Header Banner */}
-        <div className="relative h-32 bg-gradient-to-r from-[#064e3b] to-emerald-700 p-6">
-        </div>
+        <div className="relative h-32 bg-gradient-to-r from-[#064e3b] to-emerald-700 p-6"></div>
         
         <div className="px-8 pb-8 -mt-16 relative">
-          {/* Avatar and Basic Info */}
           <div className="flex flex-col md:flex-row gap-6 items-start">
             <div className="relative group shrink-0">
               <div className="h-32 w-32 rounded-full bg-white border-4 border-white shadow-xl flex items-center justify-center text-primary font-bold overflow-hidden">
@@ -155,7 +148,6 @@ export default function PatientProfilePage() {
           </div>
 
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Contact Information Card */}
             <div className="bg-muted/30 p-8 rounded-3xl border border-border">
               <h3 className="font-bold text-[#064e3b] mb-6 flex items-center gap-2 text-lg">
                 <UserCircle2 className="h-5 w-5" /> Contact Details
@@ -204,7 +196,6 @@ export default function PatientProfilePage() {
               </div>
             </div>
 
-            {/* Pets Information Card */}
             <div className="bg-muted/30 p-8 rounded-3xl border border-border">
               <h3 className="font-bold text-[#064e3b] mb-6 flex items-center gap-2 text-lg">
                 <PawPrint className="h-5 w-5" /> Registered Pets ({pets.length})
@@ -212,7 +203,7 @@ export default function PatientProfilePage() {
               
               {pets.length > 0 ? (
                 <div className="space-y-4">
-                  {pets.map(pet => (
+                  {pets.map((pet: any) => (
                     <div key={pet.id} className="bg-white p-4 rounded-2xl border border-border/50 flex items-center justify-between shadow-sm hover:shadow-md transition-shadow">
                       <div>
                         <p className="font-bold text-sm text-gray-900">{pet.name}</p>
@@ -237,7 +228,6 @@ export default function PatientProfilePage() {
         </div>
       </div>
 
-      {/* Floating Toast Notification */}
       {toastMessage && (
         <div className="fixed bottom-8 right-8 z-50 animate-in slide-in-from-bottom-5 fade-in duration-300">
           <div className={`border-l-4 rounded-xl shadow-2xl p-4 flex items-center gap-3 min-w-[250px] ${
