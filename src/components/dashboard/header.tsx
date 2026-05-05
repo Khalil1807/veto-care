@@ -47,7 +47,7 @@ export default function Header() {
         if (apts) {
           setNotifications(apts.map(apt => ({
             id: apt.id,
-            message: `New appointment request for ${apt.pet?.name || 'a patient'}`,
+            message: `New appointment request for ${(apt.pet as any)?.name || 'a patient'}`,
             time: new Date(apt.created_at),
             read: false,
             link: '/dashboard/appointments'
@@ -90,7 +90,7 @@ export default function Header() {
         if (apts) {
           setNotifications(apts.map(apt => ({
             id: apt.id,
-            message: `Appointment with Dr. ${apt.vet?.full_name || 'the vet'} confirmed!`,
+            message: `Appointment with Dr. ${(apt.vet as any)?.full_name || 'the vet'} confirmed!`,
             time: new Date(apt.created_at),
             read: true, // assume historical ones are read
             link: '/dashboard/appointments'

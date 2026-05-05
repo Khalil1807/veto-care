@@ -7,6 +7,10 @@ export type Profile = {
   specialty?: string | null
   certificate_url?: string | null
   avatar_url?: string | null
+  address?: string | null
+  experience?: string | null
+  bio?: string | null
+  created_at?: string
 }
 
 export type Pet = {
@@ -16,6 +20,7 @@ export type Pet = {
   species: string | null
   breed: string | null
   age: number | null
+  appointments?: any[]
 }
 
 export type Appointment = {

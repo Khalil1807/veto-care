@@ -10,7 +10,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { X, Loader2, Calendar, FileText } from "lucide-react"
 
-type Patient = Pet & { owner: { full_name: string, phone: string, avatar_url: string } }
+type Patient = Pet & { 
+  owner: { full_name: string, phone: string, avatar_url: string },
+  appointments?: any[]
+}
 
 export default function PatientsPage() {
   const router = useRouter()
@@ -56,7 +59,7 @@ export default function PatientsPage() {
         
         const { data: petsData } = await supabase
           .from('pets')
-          .select('*, owner:profiles!owner_id(full_name, phone, avatar_url)')
+          .select('*, owner:profiles!owner_id(full_name, phone, avatar_url), appointments!pet_id(*)')
           .in('id', petIds)
           
         if (petsData) {
@@ -194,7 +197,7 @@ export default function PatientsPage() {
                   <div className="bg-emerald-50 rounded-xl p-3 text-left mb-4 border border-emerald-100">
                     <p className="text-xs text-emerald-600 mb-1 uppercase font-bold tracking-wider">Next Vaccination</p>
                     <p className="text-sm font-bold text-emerald-800">
-                      {new Date(patient.appointments.find((a: any) => new Date(a.date) > new Date() && a.status === 'confirmed' && a.reason?.toLowerCase().includes('vaccin')).date).toLocaleDateString()}
+                      {new Date(patient.appointments?.find((a: any) => new Date(a.date) > new Date() && a.status === 'confirmed' && a.reason?.toLowerCase().includes('vaccin'))?.date).toLocaleDateString()}
                     </p>
                   </div>
                 )}
