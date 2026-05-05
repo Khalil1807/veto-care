@@ -76,17 +76,25 @@ Pet owners in Algeria often face challenges when trying to find and book reliabl
 
 ## Screenshots
 
+### Landing Page
+![Landing Page](screenshots/landing-page.png)
+*Modern and welcoming landing page for VetX.*
+
 ### Patient Dashboard
 ![Patient Dashboard](screenshots/patient-dashboard.png)
-*Overview of the patient dashboard and pet management.*
+*Overview of the patient dashboard and upcoming appointments.*
+
+### My Pets
+![My Pets](screenshots/my-pets.png)
+*Digital management of multiple pet profiles and health stats.*
 
 ### Veterinarian Dashboard
 ![Doctor Dashboard](screenshots/doctor-dashboard.png)
-*Veterinarian's view of appointments and patient records.*
+*Professional veterinarian interface with appointment management and notifications.*
 
 ### Specialist Search
 ![Specialists](screenshots/specialists.png)
-*Browsing available veterinarians across Algeria.*
+*A searchable directory of verified veterinary specialists across Algeria.*
 
 ---
 
