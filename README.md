@@ -74,6 +74,20 @@ Pet owners in Algeria often face challenges when trying to find and book reliabl
 6.  **Email Notifications:**
     - Alerts for new bookings and owner cancellations.
 
+## Screenshots
+
+### Patient Dashboard
+![Patient Dashboard](screenshots/patient-dashboard.png)
+*Overview of the patient dashboard and pet management.*
+
+### Veterinarian Dashboard
+![Doctor Dashboard](screenshots/doctor-dashboard.png)
+*Veterinarian's view of appointments and patient records.*
+
+### Specialist Search
+![Specialists](screenshots/specialists.png)
+*Browsing available veterinarians across Algeria.*
+
 ---
 
 ## Architecture
