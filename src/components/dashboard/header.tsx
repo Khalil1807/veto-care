@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from "react"
 import { supabase } from "@/lib/supabase"
 import { Input } from "@/components/ui/input"
-import { Search, Bell, X, Calendar, CheckCircle } from "lucide-react"
+import { Search, Bell, X, Calendar, CheckCircle, Menu } from "lucide-react"
 import Link from "next/link"
 
 type Notification = {
@@ -13,7 +13,7 @@ type Notification = {
   link: string;
 }
 
-export default function Header() {
+export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   const [profile, setProfile] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [notifications, setNotifications] = useState<Notification[]>([])
@@ -171,8 +171,16 @@ export default function Header() {
 
   return (
     <>
-      <header className="h-20 bg-white border-b border-border flex items-center justify-between px-8 shrink-0 relative z-30">
-        <div className="flex-1"></div>
+      <header className="h-20 bg-white border-b border-border flex items-center justify-between px-4 md:px-8 shrink-0 relative z-30">
+        <div className="flex items-center gap-4">
+          <button 
+            onClick={onMenuClick}
+            className="p-2 -ml-2 rounded-xl text-muted-foreground hover:bg-muted lg:hidden transition-colors"
+          >
+            <Menu className="h-6 w-6" />
+          </button>
+          <div className="flex-1"></div>
+        </div>
 
         <div className="flex items-center gap-6 relative">
           

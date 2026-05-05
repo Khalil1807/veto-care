@@ -23,7 +23,7 @@ const PATIENT_LINKS = [
   { name: "Medical Records", href: "/dashboard/medical-records", icon: BarChart3 },
 ]
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, onClose }: { isOpen?: boolean, onClose?: () => void }) {
   const pathname = usePathname()
   const router = useRouter()
   const [role, setRole] = useState<string | null>(null)
@@ -47,8 +47,11 @@ export default function Sidebar() {
   const links = role === 'doctor' ? DOCTOR_LINKS : PATIENT_LINKS
 
   return (
-    <div className="w-64 bg-white border-r border-border flex flex-col h-full shrink-0">
-      <div className="p-6">
+    <div className={`
+      fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-border flex flex-col h-full shrink-0 transition-transform duration-300 lg:static lg:translate-x-0
+      ${isOpen ? "translate-x-0" : "-translate-x-full"}
+    `}>
+      <div className="p-6 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-lg flex items-center justify-center">
             <BrandLogo className="h-8 w-8" />
@@ -67,6 +70,7 @@ export default function Sidebar() {
             <Link
               key={link.name}
               href={link.href}
+              onClick={onClose}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium transition-colors ${
                 isActive 
                   ? "bg-primary/10 text-primary" 
@@ -83,6 +87,7 @@ export default function Sidebar() {
       <div className="p-4 border-t border-border space-y-1">
         <Link
           href={role === 'doctor' ? "/dashboard/profile" : "/dashboard/patient-profile"}
+          onClick={onClose}
           className={`flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium transition-colors ${
             pathname === "/dashboard/profile" || pathname === "/dashboard/patient-profile"
               ? "bg-primary/10 text-primary" 
@@ -103,3 +108,4 @@ export default function Sidebar() {
     </div>
   )
 }
+
