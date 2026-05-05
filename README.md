@@ -1,4 +1,4 @@
-# VetX 🐾
+# Dr Paws 🐾
 
 > **The comprehensive web platform bridging the gap between pet owners and veterinarians in Algeria.**
 
@@ -14,7 +14,7 @@ Pet owners in Algeria often face challenges when trying to find and book reliabl
 
 ## Solution
 
-**VetX** provides a modern, full-stack solution tailored for the Algerian veterinary ecosystem. It offers a role-based experience:
+**Dr Paws** provides a modern, full-stack solution tailored for the Algerian veterinary ecosystem. It offers a role-based experience:
 - **For Pet Owners:** A seamless way to find specialists, book appointments, and manage their pets' digital health records.
 - **For Veterinarians:** A professional suite to manage schedules, clinical records, and patient relationships efficiently.
 
@@ -76,9 +76,13 @@ Pet owners in Algeria often face challenges when trying to find and book reliabl
 
 ## Screenshots
 
+### Project Preview
+![Dr Paws Mockup](screenshots/hero-mockup.png)
+*Professional showcase of the Dr Paws landing page.*
+
 ### Landing Page
 ![Landing Page](screenshots/landing-page.png)
-*Modern and welcoming landing page for VetX.*
+*Modern and welcoming landing page for Dr Paws.*
 
 ### Patient Dashboard
 ![Patient Dashboard](screenshots/patient-dashboard.png)
@@ -152,4 +156,4 @@ veto-care/
 
 ---
 
-© 2026 VetX — Professional Veterinary Care Simplified.
+© 2026 Dr Paws — Professional Veterinary Care Simplified.
