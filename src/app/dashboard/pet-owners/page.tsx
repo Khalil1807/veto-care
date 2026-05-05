@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { Profile, Pet } from "@/lib/types"
 import { Button } from "@/components/ui/button"
-import { UserCircle2, X, MapPin, Phone, Mail, PawPrint, Calendar } from "lucide-react"
+import { UserCircle2, X, MapPin, Phone, Mail, PawPrint } from "lucide-react"
 
 import { useRouter } from "next/navigation"
 
@@ -119,26 +119,23 @@ export default function PetOwnersPage() {
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-200">
             <div className="relative h-32 bg-gradient-to-r from-[#064e3b] to-emerald-700 p-6 flex justify-between items-start">
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 h-32 w-32 rounded-full bg-white border-4 border-white shadow-xl flex items-center justify-center text-primary font-bold overflow-hidden shrink-0">
+                {viewingOwner.avatar_url ? (
+                  <img src={viewingOwner.avatar_url} alt={viewingOwner.full_name || 'Owner'} className="h-full w-full object-cover" />
+                ) : (
+                  <UserCircle2 className="h-16 w-16 text-primary/40" />
+                )}
+              </div>
               <Button variant="ghost" size="icon" onClick={() => setViewingOwner(null)} className="absolute top-4 right-4 text-white/70 hover:bg-white/20 hover:text-white rounded-full">
                 <X className="h-5 w-5" />
               </Button>
             </div>
-            
-            <div className="px-8 pb-8 -mt-16 flex-1 overflow-y-auto">
-              <div className="flex flex-col md:flex-row gap-6 items-start">
-                <div className="h-32 w-32 rounded-full bg-white border-4 border-white shadow-xl flex items-center justify-center text-primary font-bold overflow-hidden shrink-0">
-                  {viewingOwner.avatar_url ? (
-                    <img src={viewingOwner.avatar_url} alt={viewingOwner.full_name || 'Owner'} className="h-full w-full object-cover" />
-                  ) : (
-                    <UserCircle2 className="h-16 w-16 text-primary/40" />
-                  )}
-                </div>
                 
-                <div className="pt-2 md:pt-16 flex-1">
-                  <h2 className="text-2xl font-bold font-heading text-gray-900">{viewingOwner.full_name || 'Unknown Client'}</h2>
-                  <div className="inline-flex mt-2 items-center px-3 py-1 bg-primary/10 text-primary font-semibold text-xs rounded-full">
-                    Client since {new Date(viewingOwner.created_at || Date.now()).getFullYear()}
-                  </div>
+            <div className="px-8 pb-8 mt-16 flex-1 overflow-y-auto">
+              <div className="text-center">
+                <h2 className="text-2xl font-bold font-heading text-gray-900">{viewingOwner.full_name || 'Unknown Client'}</h2>
+                <div className="inline-flex mt-2 items-center px-3 py-1 bg-primary/10 text-primary font-semibold text-xs rounded-full">
+                  Client since {viewingOwner.created_at ? new Date(viewingOwner.created_at).getFullYear() : new Date().getFullYear()}
                 </div>
               </div>
 
