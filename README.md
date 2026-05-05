@@ -1,34 +1,22 @@
-# Dr Paws 🐾
+# VetX 🐾
 
-> **Smart veterinary care — connecting pet owners with trusted specialists.**
+> **The comprehensive web platform bridging the gap between pet owners and veterinarians in Algeria.**
 
 ---
 
 ## Problem Statement
 
-Pet owners struggle to find and book reliable veterinary care. The traditional process involves:
-
-- Searching for vets through word-of-mouth or unverified directories
-- No centralized system to book or track appointments
-- No digital access to pet medical records or vaccination history
-- Lack of visibility into specialist availability
-- Communication gaps between owners and veterinarians
-
-Veterinarians equally lack a modern digital platform to:
-
-- Manage patient appointments efficiently
-- Maintain digital medical records and vaccination logs
-- Communicate with pet owners in real time
-- View and manage their registered patient base
-
----
+Pet owners in Algeria often face challenges when trying to find and book reliable veterinary care. The traditional process is fragmented, involving:
+- Searching for vets through unverified word-of-mouth or outdated directories.
+- No centralized system to book, manage, or track appointments.
+- Limited digital access to pet medical history or vaccination records.
+- Communication gaps between owners and specialists.
 
 ## Solution
 
-**Dr Paws** is a full-stack web platform that bridges the gap between pet owners and veterinary specialists. It provides a clean, role-based experience for two types of users:
-
-- **For Pet Owners (Patients):** Search for specialists, book appointments, manage pet profiles, and access medical records — all from one dashboard.
-- **For Veterinarians (Doctors):** Manage appointments, log medical records, add vaccinations, view patient lists, and handle pet owner relationships from a dedicated professional dashboard.
+**VetX** provides a modern, full-stack solution tailored for the Algerian veterinary ecosystem. It offers a role-based experience:
+- **For Pet Owners:** A seamless way to find specialists, book appointments, and manage their pets' digital health records.
+- **For Veterinarians:** A professional suite to manage schedules, clinical records, and patient relationships efficiently.
 
 ---
 
@@ -37,286 +25,109 @@ Veterinarians equally lack a modern digital platform to:
 ### Frontend
 - **Framework:** Next.js 16.2 (App Router)
 - **Language:** TypeScript
-- **Styling:** Tailwind CSS v4 + `tw-animate-css`
-- **Component Library:** shadcn/ui (`@base-ui/react`, `class-variance-authority`, `tailwind-merge`)
-- **Icons:** `lucide-react`
+- **Styling:** Tailwind CSS + PostCSS
+- **Component Library:** shadcn/ui (configured with new-york style)
+- **Icons:** `lucide-react` and `react-icons`
+- **Animations:** `tw-animate-css`
 
 ### Backend & Services
-- **Backend:** Supabase (`@supabase/supabase-js`)
-  - Authentication (role-based: Patient / Doctor)
-  - PostgreSQL Database
-  - Real-time data subscriptions
-  - File storage (pet images, medical record PDFs)
+- **Backend-as-a-Service:** Supabase
+  - **Authentication:** Role-based (Patient / Doctor)
+  - **Database:** PostgreSQL (with Row Level Security)
+  - **Real-time:** Live appointment notifications
+  - **Storage:** Pet photos and clinical attachments (PDF/Images)
 
 ### Development Tools
-- **Build Tool:** Next.js (Turbopack / Webpack)
-- **Linting:** ESLint + `eslint-config-next`
 - **Package Manager:** npm
-- **Language Tooling:** TypeScript 5
+- **Build Tool:** Next.js (Turbopack)
+- **Linting:** ESLint
 
 ---
 
 ## Features
 
-### For Pet Owners (Patients)
+### For Pet Owners
+1.  **Authentication & Profile Management:** Secure login and role-based dashboard access.
+2.  **Pet Management:** Register and manage multiple pet profiles (name, species, breed, age).
+3.  **Veterinarian Search:** Browse and filter trusted specialists across different regions.
+4.  **Appointment Booking:** Quick and easy booking with preferred veterinarians.
+5.  **Appointment Management:** Track status (Pending, Confirmed, Completed) and view history.
+6.  **Email Notifications:** Receive updates on appointment status changes.
 
-#### 1. Authentication & Profile
-- Sign up and log in as a Patient
-- Role-based access — Patient dashboard is isolated from the Doctor view
-- Manage personal profile and account settings
-
-#### 2. Pet Management
-- Register and manage multiple pet profiles
-- Store pet details: name, species, breed, age, weight, photo
-- View each pet's medical history and vaccination records
-
-#### 3. Specialist Search
-- Browse and search for veterinary specialists
-- Filter by specialization or location
-- View doctor profiles before booking
-
-#### 4. Appointment Booking
-- Book appointments with preferred specialists in minutes
-- Track appointment status (pending approval, confirmed, completed)
-- View appointment history
-
-#### 5. Medical Records
-- Access pet medical records logged by the veterinarian
-- View attached documents and clinical notes
-
----
-
-### For Veterinarians (Doctors)
-
-#### 1. Authentication & Profile
-- Secure login as a Doctor
-- Role-based dashboard separate from the Patient interface
-- Manage professional profile and clinic information
-
-#### 2. Dashboard Overview
-- Quick stats: pending appointments, total registered patients
-- Quick Actions: Log a medical record or add a vaccination in one click
-
-#### 3. Appointment Management
-- View and manage all appointments (pending, confirmed, completed)
-- Approve or decline appointment requests
-- Add clinical notes to completed appointments
-
-#### 4. Patient Management
-- View all registered patients (pets)
-- Access each pet's full medical history
-- Review pet owner information
-
-#### 5. Pet Owner Directory
-- Browse associated pet owners
-- Access owner contact details and their registered pets
-
-#### 6. Vaccinations
-- Log vaccination records for patients
-- Track vaccination history per pet
-
-#### 7. Medical Records
-- Create and manage digital medical records
-- Attach clinical observations and documents per appointment
+### For Veterinarians
+1.  **Registration & Verification:**
+    - Register with professional details (license number, specialization, clinic name).
+    - Admin approval workflow for verified status.
+    - Secure account status management (Active/Suspended).
+2.  **Dashboard:**
+    - Overview of pending, confirmed, and completed appointments.
+    - Quick stats and today's schedule view.
+3.  **Appointment Management:**
+    - Confirm or decline appointment requests (triggers notifications).
+    - Add clinical notes, observations, and treatments.
+    - Manage the full lifecycle of a visit (In Progress -> Completed).
+4.  **Patient Records:**
+    - View full pet medical history.
+    - Access attached medical records (PDFs/Images).
+5.  **Profile Management:**
+    - Update professional info, services offered, and clinic availability.
+6.  **Email Notifications:**
+    - Alerts for new bookings and owner cancellations.
 
 ---
 
 ## Architecture
 
 ### Project Structure
-
 ```
 veto-care/
-├── public/
-│   └── logo.png                  # Dr Paws logo
 ├── src/
-│   ├── app/
-│   │   ├── layout.tsx            # Root layout
-│   │   ├── page.tsx              # Landing page
-│   │   ├── login/                # Authentication pages
-│   │   ├── dashboard/            # Patient dashboard
-│   │   │   ├── page.tsx          # Dashboard home
-│   │   │   ├── appointments/     # My Appointments
-│   │   │   ├── pets/             # My Pets
-│   │   │   ├── specialists/      # Specialists search
-│   │   │   ├── medical-records/  # Medical Records
-│   │   │   └── profile/          # My Profile
-│   │   └── doctor/               # Doctor dashboard
-│   │       ├── page.tsx          # Doctor dashboard home
-│   │       ├── appointments/     # Appointment management
-│   │       ├── patients/         # Patient list
-│   │       ├── pet-owners/       # Pet owner directory
-│   │       ├── vaccinations/     # Vaccination records
-│   │       ├── medical-records/  # Medical records management
-│   │       └── profile/          # Doctor profile
-│   ├── components/
-│   │   ├── ui/                   # shadcn/ui base components
-│   │   ├── patient/              # Patient-specific components
-│   │   │   ├── Sidebar.tsx
-│   │   │   └── Navbar.tsx
-│   │   └── doctor/               # Doctor-specific components
-│   │       ├── Sidebar.tsx
-│   │       └── Navbar.tsx
-│   └── lib/
-│       ├── supabase.ts           # Supabase client
-│       └── utils.ts              # Utility helpers
-├── .env.local                    # Environment variables
-├── next.config.ts                # Next.js configuration
-├── tailwind.config.ts            # Tailwind configuration
-├── tsconfig.json                 # TypeScript configuration
-└── package.json
+│   ├── app/              # App Router (Next.js)
+│   ├── components/       # UI and Dashboard components
+│   ├── lib/              # Supabase client and utilities
+│   └── types/            # TypeScript definitions
+├── public/               # Static assets
+├── supabase/             # SQL migration scripts
+└── .env.local            # Environment configuration
 ```
-
-### Database Schema
-
-#### Tables
-
-- **`users`** — User profiles (shared)
-  - `id` (UUID, references auth.users)
-  - `full_name`, `email`, `phone`
-  - `role` (`patient` | `doctor`)
-  - `avatar_url`, `created_at`
-
-- **`doctor_profiles`** — Veterinarian details
-  - `id` (UUID, references users)
-  - `specialization`, `clinic_name`
-  - `license_number`, `bio`
-  - `created_at`, `updated_at`
-
-- **`pets`** — Pet profiles
-  - `id`, `owner_id` (references users)
-  - `name`, `species`, `breed`
-  - `age`, `weight`, `image_url`
-  - `created_at`
-
-- **`appointments`** — Appointment records
-  - `id`, `owner_id`, `doctor_id`, `pet_id`
-  - `scheduled_date`, `scheduled_time`
-  - `status` (`pending` | `confirmed` | `completed` | `cancelled`)
-  - `reason`, `notes`
-  - `created_at`, `updated_at`
-
-- **`medical_records`** — Clinical records per pet
-  - `id`, `pet_id`, `doctor_id`, `appointment_id`
-  - `diagnosis`, `treatment`, `notes`
-  - `document_url`
-  - `created_at`
-
-- **`vaccinations`** — Vaccination history
-  - `id`, `pet_id`, `doctor_id`
-  - `vaccine_name`, `date_administered`
-  - `next_due_date`, `notes`
-  - `created_at`
-
----
 
 ### Authentication Flow
-
-```
-Patient Login                      Doctor Login
-      │                                  │
-      ▼                                  ▼
-Supabase Auth.signInWithPassword   Supabase Auth.signInWithPassword
-      │                                  │
-      ▼                                  ▼
- Check role = "patient"            Check role = "doctor"
-      │                                  │
-      ▼                                  ▼
-Redirect to /dashboard             Redirect to /doctor
-```
-
----
+1.  User registers/logs in via Supabase Auth.
+2.  Auth trigger creates a entry in the `profiles` table.
+3.  Application checks the `role` field to redirect to either `/dashboard` (Patient) or `/doctor` (Veterinarian).
 
 ### Routing Architecture
-
-```
-/                          → Landing Page
-/login                     → Login / Sign Up
-
-// Patient Routes (Protected)
-/dashboard                 → Patient Dashboard Home
-/dashboard/appointments    → My Appointments
-/dashboard/pets            → My Pets
-/dashboard/specialists     → Find Specialists
-/dashboard/medical-records → Medical Records
-/dashboard/profile         → My Profile
-
-// Doctor Routes (Protected)
-/doctor                    → Doctor Dashboard Home
-/doctor/appointments       → Manage Appointments
-/doctor/patients           → Patient List
-/doctor/pet-owners         → Pet Owner Directory
-/doctor/vaccinations       → Vaccination Records
-/doctor/medical-records    → Medical Records
-/doctor/profile            → Doctor Profile
-```
-
----
-
-## Screenshots
-
-### Patient Interface
-
-![Patient Dashboard](screenshots/patient-dashboard.png)
-*Patient dashboard with appointment stats and quick booking*
-
-### Doctor Interface
-
-![Doctor Dashboard](screenshots/doctor-dashboard.png)
-*Doctor dashboard with patient stats and quick actions*
+- `/` - Landing Page
+- `/auth` - Login/Signup (Doctor & Patient paths)
+- `/dashboard` - Patient root (Pets, Specialists, Appointments)
+- `/doctor` - Veterinarian root (Patients, Schedule, Records)
 
 ---
 
 ## Setup & Installation
 
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/your-username/veto-care.git
-cd veto-care
-```
-
-### 2. Install dependencies
-
-```bash
-npm install
-```
-
-### 3. Configure environment variables
-
-Create a `.env.local` file at the root:
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
-```
-
-### 4. Set up the database
-
-Run the provided SQL migration files in your Supabase SQL editor to create all required tables, RLS policies, and seed data.
-
-### 5. Start the development server
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+1.  **Clone the Repository:**
+    ```bash
+    git clone https://github.com/your-username/veto-care.git
+    cd veto-care
+    ```
+2.  **Install Dependencies:**
+    ```bash
+    npm install
+    ```
+3.  **Environment Variables:**
+    Create a `.env.local` file with your Supabase credentials:
+    ```env
+    NEXT_PUBLIC_SUPABASE_URL=your_project_url
+    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_public_key
+    ```
+4.  **Database Setup:**
+    Run the SQL scripts in the `veto_care_master_schema.sql` file within your Supabase SQL Editor.
+5.  **Run Locally:**
+    ```bash
+    npm run dev
+    ```
 
 ---
 
-## Available Scripts
-
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Start development server at http://localhost:3000 |
-| `npm run build` | Build for production |
-| `npm start` | Start production server |
-| `npm run lint` | Run ESLint |
-
----
-
-## License
-
-© 2026 Dr Paws — Smart veterinary care, simplified.
+© 2026 VetX — Professional Veterinary Care Simplified.
